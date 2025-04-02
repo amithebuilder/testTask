@@ -2,6 +2,7 @@ package com.example.accessingdatajpa.controller;
 
 import com.example.accessingdatajpa.entity.Product;
 import com.example.accessingdatajpa.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ public class ProductController {
 
     private final ProductRepository productRepository;
 
+    @Autowired
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -24,7 +26,7 @@ public class ProductController {
             @RequestParam(defaultValue = "asc") String sortDirection) {
 
         if (!List.of("asc", "desc").contains(sortDirection.toLowerCase())) {
-            throw new IllegalArgumentException("Sort direction must be 'asc' or 'desc'");
+            sortDirection = "asc"; //дефолтное значение типа
         }
 
         Sort sort = Sort.by(
