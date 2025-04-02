@@ -5,18 +5,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @MappedSuperclass
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    protected UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
 
     @Override
     public boolean equals(Object o) {
